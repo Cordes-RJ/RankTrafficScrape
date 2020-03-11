@@ -18,10 +18,8 @@ def CleanList(siteList):
 def GetSiteList(path):
     return CleanList(ReadInCSV(path))
 
-def URLfromSiteName(siteName):
-    return "https://www.rank2traffic.com/" + siteName
-#%%
-    
+"""
 import Constants
 
 x = GetSiteList(Constants.sitelistpath)
+"""
