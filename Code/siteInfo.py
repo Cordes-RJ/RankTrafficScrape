@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import Constants
 class siteInfo:
     def __init__(self):
         self.name = ""
@@ -23,10 +23,14 @@ class siteInfo:
         return csvBlobString
     def Parse(self,text):
         self.FindName(text)
-        self.FindtrafficAndUEstats(text)
-        self.FindtrafficSources(text)
-        self.FindAdvertisingAndTrafficStats(text)
-        self.FtoScrape = False
+        try:
+            self.FindtrafficAndUEstats(text)
+            self.FindtrafficSources(text)
+            self.FindAdvertisingAndTrafficStats(text)
+            self.FtoScrape = False
+        except:
+            self.FtoScrape = True
+            writeBadHtml(text)
     def FindName(self,text):
         adelimiter = "Latest statistics for <strong>"
         bdelimiter = "</strong>"
@@ -113,6 +117,11 @@ class siteInfo:
         self.findRevenue(statValues[0])
         self.findVisits(statValues[1])
         self.findPageviews(statValues[2])
+
+def writeBadHtml(htmltxt):
+    f = open(Constants.checkHTML, 'w',encoding="utf-8")
+    f.write(htmltxt)
+    f.close()
 
 def findStrangeDatum(text,adelimiter,bdelimiter):
     a =text.find(adelimiter)
