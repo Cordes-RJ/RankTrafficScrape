@@ -16,7 +16,7 @@ class siteInfo:
         self.UEbounce = 0 # Bounce rate %
         self.alexaRank = 0 # alexa rank
     def toCSVRow(self): # returns siteinfo as 
-        items = [self.name,self.FtoScrape ,self.TrafficViews ,self.TrafficVisits ,self.TrafficSessions, self.Revenue ,self.TrafficSourceSearch ,self.TrafficSourceDirect ,self.TrafficSourceRefs ,self.UEviewsPerSession ,self.UESessionDuration ,self.UEbounce ,]
+        items = [self.name,self.FtoScrape ,self.TrafficViews ,self.TrafficVisits ,self.TrafficSessions, self.Revenue ,self.TrafficSourceSearch ,self.TrafficSourceDirect ,self.TrafficSourceRefs ,self.UEviewsPerSession ,self.UESessionDuration ,self.UEbounce,self.alexaRank]
         csvBlobString = ""
         for item in items:
             csvBlobString += str(item) + ","
@@ -60,9 +60,9 @@ class siteInfo:
         sourceValues = []
         for sourceType in sourceTypes:
             sourceValues.append(self.findtrafficSource(text,sourceType,g))
-        self.TrafficSourceSearch = float(sourceValues[0])
-        self.TrafficSourceDirect = float(sourceValues[1])
-        self.TrafficSourceRefs = float(sourceValues[2])
+        self.TrafficSourceSearch = float(sourceValues[0])/100
+        self.TrafficSourceDirect = float(sourceValues[1])/100
+        self.TrafficSourceRefs = float(sourceValues[2])/100
     def findAdvertisingAndTrafficStat(self,text,statType,start):
         h = text.find(statType, start)
         i = text.find("<span class=\"badge badge-info\">",h+len(statType))
