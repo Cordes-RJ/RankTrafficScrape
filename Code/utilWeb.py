@@ -5,6 +5,7 @@
 import requests
 import utilTime
 import time
+import random as rand
 
 # a request func
 def getResponseText(URL,headerTxt, timeout):
@@ -16,11 +17,12 @@ def politelyScrape(objectList,URLbuildFunc, requestFunc, parseResponseFunc,heade
     for i in objectList:
         url = URLbuildFunc(i)
         responseText = ""
+        print("request sent")
         stopwatch = utilTime.StopWatch()
         responseText = requestFunc(url,headerTxt,timeout)
         t = stopwatch.stop()
         if responseText != "":
             parsed.append(parseResponseFunc(responseText))
-        time.sleep(int(t * 1.1)) # being polite to server
+        time.sleep(t * 1.1+rand.randint(0,5)/5) # being polite to server
         # we give the server 10% more time then it took to respond
     return parsed
