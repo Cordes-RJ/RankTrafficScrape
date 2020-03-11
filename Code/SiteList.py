@@ -18,6 +18,8 @@ def CleanList(siteList):
 def GetSiteList(path):
     return CleanList(ReadInCSV(path))
 
+def EmptyContents(path):
+    open(path, 'w').close()
 """
 import Constants
 
