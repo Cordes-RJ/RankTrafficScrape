@@ -22,5 +22,5 @@ def politelyScrape(objectList,URLbuildFunc, requestFunc, parseResponseFunc,heade
         if responseText != "":
             parsed.append(parseResponseFunc(responseText))
         time.sleep(int(t * 1.1)) # being polite to server
-        # we give the server 10% more time then it takes to respond
+        # we give the server 10% more time then it took to respond
     return parsed
